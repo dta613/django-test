@@ -1,7 +1,7 @@
 amqp==2.1.4
 asn1crypto==0.22.0
 attrs==17.2.0
-Automat==0.6.0
+Automat==0.6.0gi
 billiard==3.5.0.2
 boto==2.47.0
 celery==4.0.2
@@ -34,7 +34,7 @@ django-timezone-field==2.0
 enum34==1.1.6
 flake8==3.3.0
 funcsigs==1.0.2
-functools32==3.2.3.post2
+#her
 future==0.16.0
 gunicorn==19.7.1
 hyperlink==17.1.1
@@ -72,8 +72,6 @@ pyparsing==2.2.0
 python-dateutil==2.6.0
 pytz==2017.2
 queuelib==1.4.2
-rapidpro-dash==1.2
-rapidpro-python==2.1.7
 raven==6.1.0
 rcssmin==1.0.6
 redis==2.10.5
@@ -99,3 +97,4 @@ xlrd==1.0.0
 xlutils==2.0.0
 xlwt==1.2.0
 zope.interface==4.4.1
+whitenoise==2.0.6

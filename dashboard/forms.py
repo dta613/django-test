@@ -17,7 +17,7 @@ class Patient_form(forms.Form):
     date_input = models.DateTimeField(default=datetime.now, blank=True)
 
     model = Patient
-    fields = ('Patient_name','initial_visit','condition')
+    fields = ('Patient_name','initial_visit','condition', 'date_input')
 
     def save(self, commit=True):
         Patient_data = super(Patient_form, self).save(commit=False)
@@ -27,6 +27,8 @@ class Patient_form(forms.Form):
         if commit:
             Patient_data.save()
             return Patient_data
+        else:
+            return redirect('/form/')
 
 # class RegisterForm(UserCreationForm):
 # 	email = forms.EmailField(label="Email Address")

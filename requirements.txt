@@ -2,7 +2,6 @@ amqp==2.1.4
 asn1crypto==0.22.0
 attrs==17.2.0
 Automat==0.6.0
-BeautifulSoup==3.2.1
 billiard==3.5.0.2
 boto==2.47.0
 celery==4.0.2

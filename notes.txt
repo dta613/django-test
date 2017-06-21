@@ -40,3 +40,13 @@
 11:40 - users are able to be signup, login, logout
       - commit pushed to github
       - working on deploying to Heroku
+5:53  - dawa-test is deployed to Heroku
+      - Login page works on production web app
+      - Successful signup, login, logout !
+7:59  - Error:
+django.core.exceptions.ImproperlyConfigured: Requested setting DEFAULT_INDEX_TABLESPACE, but settings
+are not configured. You must either define the environment variable DJANGO_SETTINGS_MODULE or call set
+tings.configure() before accessing settings.
+
+export DJANGO_SETTINGS_MODULE=django_test.settings
+heroku config:set DJANGO_SETTINGS_MODULE=django_test.settings --account personal

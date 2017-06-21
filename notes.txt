@@ -86,3 +86,7 @@ s a good reason for your site to serve other parts of itself in a frame, you sho
 Y'.
 
 System check identified 9 issues (0 silenced).
+
+11:57 - admin page works with login
+      - admin page allows new information to be added
+      - dashboard app is not able to see information

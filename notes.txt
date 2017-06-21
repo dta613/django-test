@@ -90,3 +90,5 @@ System check identified 9 issues (0 silenced).
 11:57 - admin page works with login
       - admin page allows new information to be added
       - dashboard app is not able to see information
+      - styling is needed for admin page on herokuapp
+      - needs staticfiles to be hosted properly

@@ -112,18 +112,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_ROOT = 'static'
-STATIC_URL = '/static/'
+
 LOGIN_REDIRECT_URL = '/dashboard'
 
-#SECURE_CONTENT_TYPE_NOSNIFF = True
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-#SECURE_BROWSER_XSS_FILTER = True
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+STATIC_URL = '/static/'
 
-#SECURE_SSL_REDIRECT = True
-
-#SESSION_COOKIE_SECURE = True
-
-#CSRF_COOKIE_SECURE = True
-
-#X_FRAME_OPTIONS = 'DENY'
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_ROOT, 'static'),
+)

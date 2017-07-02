@@ -92,3 +92,9 @@ System check identified 9 issues (0 silenced).
       - dashboard app is not able to see information
       - styling is needed for admin page on herokuapp
       - needs staticfiles to be hosted properly
+
+July 1
+
+8:32 - collectstatic sent css, js, and img files to static directory
+      - need to create postgres db in herokuapp
+      - styling not working in local heroku

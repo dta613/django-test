@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -20,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '=5rmg9_wgb4iz8)+ro^xw63^80!6mbca*8lb-mh9d8jg7y!jfj'
+#SECRET_KEY = '=5rmg9_wgb4iz8)+ro^xw63^80!6mbca*8lb-mh9d8jg7y!jfj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -78,23 +79,29 @@ WSGI_APPLICATION = 'django_test.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-DATABASES = {
+#DATABASES = {
     #'default': {
     #    'ENGINE': 'django.db.backends.sqlite3',
     #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.path.join ('postgres'),
-        'USER' : 'postgres',
-        'PASSWORD': 'C@rp3D!3m',
-        'HOST': 'DATABASE_URL',
-        'PORT' : '5433'
+    #'default': {
+    #    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #    'NAME': os.path.join ('postgres'),
+    #    'USER' : 'postgres',
+    #    'PASSWORD': 'C@rp3D!3m',
+    #    'HOST': '',
+    #    'PORT' : '5433'
 
-    }
+
+
+
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', default=False, cast=bool)
+DATABASES = {
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
 }
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 

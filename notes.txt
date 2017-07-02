@@ -98,3 +98,7 @@ July 1
 8:32 - collectstatic sent css, js, and img files to static directory
       - need to create postgres db in herokuapp
       - styling not working in local heroku
+
+July 2
+      - Styling works in dawa-test application
+      - 

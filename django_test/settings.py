@@ -88,7 +88,7 @@ DATABASES = {
         'NAME': os.path.join ('postgres'),
         'USER' : 'postgres',
         'PASSWORD': 'C@rp3D!3m',
-        'HOST': 'localhost',
+        'HOST': 'dawa-test.herokuapp.com',
         'PORT' : '5433'
 
     }

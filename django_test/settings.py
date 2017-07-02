@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 from decouple import config
+import dj_database_url
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -93,7 +94,7 @@ WSGI_APPLICATION = 'django_test.wsgi.application'
     #    'HOST': '',
     #    'PORT' : '5433'
 
-
+db_from_env = dj_database_url.config(conn_max_age=500)
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', cast=bool)
 DATABASES = {
@@ -104,7 +105,7 @@ DATABASES = {
         'PASSWORD': config('DB_PASSWORD'),
         'HOST': config('DB_HOST'),
         'PORT': '',
-    }
+    }.update(db_from_env)
 }
 
 # Internationalization

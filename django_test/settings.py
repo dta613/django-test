@@ -98,15 +98,18 @@ db_from_env = dj_database_url.config(conn_max_age=500)
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', cast=bool)
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#    'default': {
+    #    'ENGINE': 'django.db.backends.postgresql_psycopg2',
     #    'NAME': config('DB_NAME'),
     #    'USER': config('DB_USER'),
     #    'PASSWORD': config('DB_PASSWORD'),
     #    'HOST': config('DB_HOST'),
     #    'PORT': '5432',
-        dj_database_url.config(default=config('DATABASE_URL'))
-    }
+    #    dj_database_url.config(default=config('DATABASE_URL'))
+    'default': dj_database_url.config(default=config('DATABASE_URL'),)
+
+
+
 }
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

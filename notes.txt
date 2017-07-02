@@ -101,4 +101,6 @@ July 1
 
 July 2
       - Styling works in dawa-test application
-      - 
+      - Database migrated - postgres works
+      - Use this command to run python scripts from CLI to heroku application
+        "heroku run python3 manage.py xxxx -a dawa-test"

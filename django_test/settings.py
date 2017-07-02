@@ -104,10 +104,10 @@ DATABASES = {
         'USER': config('DB_USER'),
         'PASSWORD': config('DB_PASSWORD'),
         'HOST': config('DB_HOST'),
-        'PORT': '',
-    }.update(db_from_env)
+        'PORT': '5432',
+        dj_database_url.config(default=config('DATABASE_URL'))
+    }
 }
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 

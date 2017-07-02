@@ -11,7 +11,6 @@ cffi==1.10.0
 chardet==3.0.4
 colorama==0.3.9
 configparser==3.5.0
--e git+https://github.com/nyaruka/confmodel.git@f5c1e5554fc03bd86c77f8573679779f043c39e6#egg=confmodel
 constantly==15.1.0
 contextlib2==0.5.5
 cookies==2.2.1

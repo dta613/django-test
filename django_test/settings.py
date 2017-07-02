@@ -47,11 +47,11 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
 )
 
 ROOT_URLCONF = 'django_test.urls'
@@ -79,9 +79,18 @@ WSGI_APPLICATION = 'django_test.wsgi.application'
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
 DATABASES = {
+    #'default': {
+    #    'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.path.join ('postgres'),
+        'USER' : 'postgres',
+        'PASSWORD': 'C@rp3D!3m',
+        'HOST': 'localhost',
+        'PORT' : '5433'
+
     }
 }
 
@@ -105,3 +114,15 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/dashboard'
+
+#SECURE_CONTENT_TYPE_NOSNIFF = True
+
+#SECURE_BROWSER_XSS_FILTER = True
+
+#SECURE_SSL_REDIRECT = True
+
+#SESSION_COOKIE_SECURE = True
+
+#CSRF_COOKIE_SECURE = True
+
+#X_FRAME_OPTIONS = 'DENY'

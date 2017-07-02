@@ -1,5 +1,5 @@
 from django import forms
-from models import Patient
+from dashboard.models import Patient
 from django.forms import widgets
 from datetime import datetime, date
 from django.db import models

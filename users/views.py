@@ -5,12 +5,12 @@ from django.contrib.auth import logout
 # Create your views here.
 
 def signup(request):
-    print "signing up"
+    #print "signing up"
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
-        print form
+        #print form
         if form.is_valid():
-            print "form is valid"
+            #print "form is valid"
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')

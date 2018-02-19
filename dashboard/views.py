@@ -20,7 +20,7 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
-from TEST.serializers import UserSerializer, GroupSerializer
+from dashboard.serializers import UserSerializer, GroupSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):

@@ -28,7 +28,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*/.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['*.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -77,22 +77,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'django_test.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
-#DATABASES = {
-    #'default': {
-    #    'ENGINE': 'django.db.backends.sqlite3',
-    #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-
-    #'default': {
-    #    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #    'NAME': os.path.join ('postgres'),
-    #    'USER' : 'postgres',
-    #    'PASSWORD': 'C@rp3D!3m',
-    #    'HOST': '',
-    #    'PORT' : '5433'
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 SECRET_KEY = config('SECRET_KEY')

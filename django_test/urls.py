@@ -21,7 +21,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
-from TEST import views
+from dashboard import views
 
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -47,9 +47,6 @@ urlpatterns = [
 	url(r'^login/', auth_views.login, name='login'),
     url(r'^logout/$', users_views.logout, name='logout'),
     url(r'^signup/', users_views.signup, name='signup'),
-    url(r'^dashboard/', dashboard_views.IndexView.as_view(), name='dashboard'),
-    url(r'^form/', dashboard_views.MyFormView.as_view(), name='form'),
-    url(r'^list/$', dashboard_views.Patient_list.as_view(), name='list'),
     url(r'^$', users_views.index, name='index'),
 
 

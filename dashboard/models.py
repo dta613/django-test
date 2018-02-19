@@ -12,3 +12,9 @@ class Patient(models.Model):
     initial_visit = models.DateField()
     followup_appt = models.DateField()
     reminder_freq = models.PositiveSmallIntegerField()
+
+class UserName(models.Model):
+    username = models.CharField(max_length = 30)
+
+class PassWord(models.Model):
+    password = models.CharField(max_length = 30, unique=True)

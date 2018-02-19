@@ -16,10 +16,48 @@ from django.views.generic.edit import FormView
 
 
 
+from django.contrib.auth import authenticate, login
+from django.http import HttpResponse
+from django.contrib.auth.models import User, Group
+from rest_framework import viewsets
+from TEST.serializers import UserSerializer, GroupSerializer
 
-class Patient_list(ListView):
-    model = Patient
 
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
+
+class GroupViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
+
+# Create your views here.
+
+def IndexView(request):
+    return HttpResponse(render(request, "index.html"))
+
+def my_view(request):
+    username = request.POST['username']
+    password = request.POST['password']
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        # Redirect to a success page.
+        render(request, "login_success.html")
+    else:
+        #Return an 'invalid' login error message
+        render(request, "login_failure.html")
+
+#No longer used
+# class Patient_list(ListView):
+#     model = Patient
+#
 
 class IndexView(generic.ListView):
     template_name = 'dashboard/dashboard.html'

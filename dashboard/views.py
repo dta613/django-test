@@ -23,7 +23,7 @@ from dashboard.serializers import UserSerializer
 
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404,HttpResponse,HttpResponseRedirect
-import requests
+
 import random
 from django.views.generic import View
 from .models import User_list

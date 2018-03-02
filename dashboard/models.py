@@ -13,8 +13,8 @@ class Patient(models.Model):
     followup_appt = models.DateField()
     reminder_freq = models.PositiveSmallIntegerField()
 
-class UserName(models.Model):
-    username = models.CharField(max_length = 30)
 
-class PassWord(models.Model):
+
+class User(models.Model):
+    username = models.CharField(max_length = 30)
     password = models.CharField(max_length = 30, unique=True)

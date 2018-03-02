@@ -22,6 +22,42 @@ from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from dashboard.serializers import UserSerializer, GroupSerializer
 
+from django.shortcuts import render, get_object_or_404
+from django.http import Http404,HttpResponse,HttpResponseRedirect
+import requests
+import random
+from django.views.generic import View
+from .models import User
+from django.db.models import Avg
+from django.core.exceptions import ObjectDoesNotExist,MultipleObjectsReturned
+from rest_framework import viewsets
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from django.conf import settings
+from django.views.generic import ListView
+
+
+@csrf_exempt
+def user_list(request):
+    """
+    List all users.
+    """
+    if request.method == 'GET':
+        users = User.objects.all()
+        serializer = UserSerializer(snippets, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = UserSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
 
 class UserViewSet(viewsets.ModelViewSet):
     """

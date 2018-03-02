@@ -15,6 +15,6 @@ class Patient(models.Model):
 
 
 
-class User(models.Model):
+class User_list(models.Model):
     username = models.CharField(max_length = 30)
     password = models.CharField(max_length = 30, unique=True)

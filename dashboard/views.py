@@ -18,16 +18,15 @@ from django.views.generic.edit import FormView
 
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponse
-from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
-from dashboard.serializers import UserSerializer, GroupSerializer
+from dashboard.serializers import UserSerializer
 
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404,HttpResponse,HttpResponseRedirect
 import requests
 import random
 from django.views.generic import View
-from .models import User
+from .models import User_list
 from django.db.models import Avg
 from django.core.exceptions import ObjectDoesNotExist,MultipleObjectsReturned
 from rest_framework import viewsets
@@ -48,7 +47,7 @@ def user_list(request):
     """
     if request.method == 'GET':
         users = User.objects.all()
-        serializer = UserSerializer(snippets, many=True)
+        serializer = UserSerializer(users, many=True)
         return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'POST':
@@ -59,19 +58,41 @@ def user_list(request):
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
+@csrf_exempt
+def user_detail(request, pk):
+    """
+    Retrieve, update or delete a code snippet.
+    """
+    try:
+        User = User.objects.get(pk=pk)
+    except User.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET':
+        serializer = UserSerializer(User)
+        return JsonResponse(serializer.data)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = SnippetSerializer(snippet, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        snippet.delete()
+        return HttpResponse(status=204)
+
+
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = User.objects.all().order_by('-date_joined')
+    queryset = User_list.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
 
-class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
+
 
 # Create your views here.
 

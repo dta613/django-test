@@ -2,3 +2,7 @@
 migrations
 postgres
 notes.txt
+
+src/
+
+*.pyc

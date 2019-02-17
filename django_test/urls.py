@@ -15,7 +15,6 @@ Including another URLconf
 from django.conf.urls import url
 from django.urls import include, path
 from django.contrib import admin
-from django.contrib.auth import views as auth_views
 import myapp
 from myapp.views import login as login
 from myapp.views import logout as logout

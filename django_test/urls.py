@@ -12,20 +12,21 @@ Class-based views
 Including another URLconf
     1. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import include, url
+from django.conf.urls import url
+from django.urls import include, path
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from dashboard import views as dashboard_views
-from users import views as users_views
+import myapp
+from myapp.views import login as login
+from myapp.views import logout as logout
+from myapp.views import signup as signup
+from myapp.views import index as index
 
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
-	url(r'^login/', auth_views.login, name='login'),
-    url(r'^logout/$', users_views.logout, name='logout'),
-    url(r'^signup/', users_views.signup, name='signup'),
-    url(r'^dashboard/', dashboard_views.IndexView.as_view(), name='dashboard'),
-    url(r'^form/', dashboard_views.MyFormView.as_view(), name='form'),
-    url(r'^list/$', dashboard_views.Patient_list.as_view(), name='list'),
-    url(r'^$', users_views.index, name='index'),
+    path('admin', admin.site.urls),
+    url(r'^logout/', logout, name='logout'),
+    url(r'^signup/', signup, name='signup'),
+    url(r'^login/', login, name='login'),
+    url(r'^$', index, name='index'),
 ]

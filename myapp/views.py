@@ -17,7 +17,7 @@ from django.views.generic.edit import FormView
 ### Current issue loading the views with the templates
 
 def index(request):
-    return render(request, 'static/templates/index.html',)
+    return render(request, 'index.html',)
 
 
 def login(request):
@@ -52,3 +52,24 @@ def signup(request, View):
 
 def logout(request, View):
     return render(request, "logout.html",)
+
+
+from rest_framework import viewsets
+from serializers import UserSerializer, PatientSerializer
+from models import User_list, Patient
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User_list.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
+
+
+class PatientViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows patients to be viewed or edited.
+    """
+    queryset = Patient.objects.all()
+    serializer_class = PatientSerializer

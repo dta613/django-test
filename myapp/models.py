@@ -7,8 +7,6 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 
-
-
 # Notes and Resources:
 #https://djangobook.com/mdj2-models/
 # https://opal.openhealthcare.org.uk/docs/guides/topic-guides/
@@ -49,11 +47,11 @@ class Patient(models.Model):
     gender = models.CharField(max_length=60)
     dob = models.DateField()
     occupation = models.CharField(max_length=30)
-    contact_number = models.PhoneNumberField()
+    contact_number = PhoneNumberField()
     residence = models.CharField(max_length=60)
     religion = models.CharField(max_length=60)
     parent_guardian_name = models.CharField(max_length=60)
-    parent_guardian_contact_number = models.PhoneNumberField()
+    parent_guardian_contact_number = PhoneNumberField()
     date_data_added = models.DateTimeField()
     date_time_updated = models.DateTimeField()
 
@@ -61,17 +59,17 @@ class User_list(models.Model):
     username = models.CharField(max_length = 30)
     password = models.CharField(max_length = 30, unique=True)
 
-class Provider(models.Models):
+class Provider(models.Model):
     doctor_name = models.CharField(max_length=60)
     description = models.CharField(max_length=60)
     date_data_added = models.DateTimeField()
 
-class Patient_Diagnosis(models.Models):
+class Patient_Diagnosis(models.Model):
     diagnosis_condition = models.CharField(max_length=60)
     notes = models.TextField()
 
 #How do we want to create this class object to retrieve values from a file? - Lookup List
-class Diagnosis_Class(models.Models):
+class Diagnosis_Class(models.Model):
     diagnosis_option_value = (
         ('', 'Please select a diagnosis'),
         ('simple malaria', 'severe malaria'),
@@ -83,9 +81,9 @@ class Diagnosis_Class(models.Models):
         ('Congenital dyserythropoietic anaemias','Congenital dyserythropoietic anaemias')
     )
 
-class Appointment(models.Models):
+class Appointment(models.Model):
     date_appointment = models.DateField()
-    provider = Provider.doctor_name()
+    provider = models.CharField(max_length=60)
     type = ('Please select type of appointment',
     'Consultation', 'Lab', 'Follow-up'
     )
@@ -94,7 +92,7 @@ class Appointment(models.Models):
     )
     notes = models.TextField()
 
-class Patient_Vitals
+class Patient_Vitals(models.Model):
     temperature = models.PositiveSmallIntegerField()
     weight = models.PositiveSmallIntegerField()
     sbp = models.PositiveSmallIntegerField()
@@ -102,16 +100,16 @@ class Patient_Vitals
     heartrate = models.PositiveSmallIntegerField()
     respiratory = models.PositiveSmallIntegerField()
 
-class Patient_Medications
-    provider = Provider.doctor_name()
+class Patient_Medications(models.Model):
+    provider = models.CharField(max_length=60)
     prescription_start = models.DateField()
     prescription_end = models.DateField()
-    prescribed_items = models.ChoiceField()
+    prescribed_items = models.CharField(max_length=60)
     prescription = models.TextField()
 
 #How do we want to create this class to retrieve values from a file? - LookupList
 
-class Medications_Class
+class Medications_Class(models.Model):
     medication_option_value = (
         ('', 'Please select a medication'),
         ('simple malaria', 'severe malaria'),
@@ -123,13 +121,13 @@ class Medications_Class
         ('Congenital dyserythropoietic anaemias','Congenital dyserythropoietic anaemias')
     )
 
-class Patient_Labs
+class Patient_Labs(models.Model):
     type = models.CharField(max_length=30)
     notes = models.TextField()
 
 #What are the names of the labs that needs to be in this class object?
 #How do we configure for dynamic user entry to add to the choices?
-class Labs_Class
+class Labs_Class(models.Model):
     labs_option_value = (
         ('', 'Please select a lab type'),
         ('simple malaria', 'severe malaria'),
@@ -142,12 +140,12 @@ class Labs_Class
     )
 
 
-class Patient_Imaging
+class Patient_Imaging(models.Model):
     type = models.CharField(max_length=30)
     notes = models.TextField()
 
 #How do we configure for dynamic user entry to add to the choices?
-class Imaging_Class
+class Imaging_Class(models.Model):
     imaging_option_value = (
         ('', 'Please select a imaging type'),
         ('simple malaria', 'severe malaria'),
@@ -160,66 +158,66 @@ class Imaging_Class
     )
 
 
-class Visit(models.Models):
+class Visit(models.Model):
     date_visit = models.DateField()
-    provider = Provider.doctor_name()
-    health_condition = Patient_Diagnosis.diagnosis_condition()
+    provider = models.CharField(max_length=60)
+    health_condition = models.CharField(max_length=60)
     type = ('Please select type of appointment',
     'Consultation', 'Lab', 'Follow-up'
     )
     notes = models.TextField()
-    vitals = Vitals_Class()
-    medication = Patient_Medications()
-    labs = Patient_Labs()
+    vitals = models.CharField(max_length=60)
+    medication = models.CharField(max_length=60)
+    labs = models.CharField(max_length=60)
 
-class Patient_ANC
+class Patient_ANC(models.Model):
     Patient_firstname = models.CharField(max_length=60)
     Patient_lastname = models.CharField(max_length=60)
     age = models.PositiveSmallIntegerField()
     gender = models.CharField(max_length=60)
     dob = models.DateField()
     occupation = models.CharField(max_length=30)
-    contact_number = models.PhoneNumberField()
+    contact_number = PhoneNumberField()
     residence = models.CharField(max_length=60)
     religion = models.CharField(max_length=60)
     parent_guardian_name = models.CharField(max_length=60)
-    parent_guardian_contact_number = models.PhoneNumberField()
+    parent_guardian_contact_number = PhoneNumberField()
     date_data_added = models.DateTimeField()
     date_time_updated = models.DateTimeField()
     parity = models.CharField(max_length=30)
     lmp = models.CharField(max_length=30)
 
 
-class Patient_IWC
+class Patient_IWC(models.Model):
     Patient_firstname = models.CharField(max_length=60)
     Patient_lastname = models.CharField(max_length=60)
     age = models.PositiveSmallIntegerField()
     gender = models.CharField(max_length=60)
     dob = models.DateField()
-    contact_number = models.PhoneNumberField()
+    contact_number = PhoneNumberField()
     residence = models.CharField(max_length=60)
     parent_guardian_name = models.CharField(max_length=60)
-    parent_guardian_contact_number = models.PhoneNumberField()
+    parent_guardian_contact_number = PhoneNumberField()
     date_data_added = models.DateTimeField()
     date_time_updated = models.DateTimeField()
 
 
-class Patient_Inpatient
+class Patient_Inpatient(models.Model):
     Patient_firstname = models.CharField(max_length=60)
     Patient_lastname = models.CharField(max_length=60)
     age = models.PositiveSmallIntegerField()
     gender = models.CharField(max_length=60)
     dob = models.DateField()
     occupation = models.CharField(max_length=30)
-    contact_number = models.PhoneNumberField()
+    contact_number = PhoneNumberField()
     residence = models.CharField(max_length=60)
     religion = models.CharField(max_length=60)
     parent_guardian_name = models.CharField(max_length=60)
-    parent_guardian_contact_number = models.PhoneNumberField()
+    parent_guardian_contact_number = PhoneNumberField()
     date_data_added = models.DateTimeField()
     date_time_updated = models.DateTimeField()
 
-class ANC_Vitals
+class ANC_Vitals(models.Model):
     temperature = models.PositiveSmallIntegerField()
     weight = models.PositiveSmallIntegerField()
     sbp = models.PositiveSmallIntegerField()
@@ -227,7 +225,7 @@ class ANC_Vitals
     heartrate = models.PositiveSmallIntegerField()
     respiratory = models.PositiveSmallIntegerField()
 
-class IWC_Vitals
+class IWC_Vitals(models.Model):
     temperature = models.PositiveSmallIntegerField()
     weight = models.PositiveSmallIntegerField()
     sbp = models.PositiveSmallIntegerField()
@@ -235,34 +233,34 @@ class IWC_Vitals
     heartrate = models.PositiveSmallIntegerField()
     respiratory = models.PositiveSmallIntegerField()
 
-class ANC_Labs
+class ANC_Labs(models.Model):
     type = models.CharField(max_length=30)
     notes = models.TextField()
 
-class IWC_Labs
+class IWC_Labs(models.Model):
     type = models.CharField(max_length=30)
     notes = models.TextField()
 
-class ANC_Visit
+class ANC_Visit(models.Model):
     date_visit = models.DateField()
-    provider = Provider.doctor_name()
-    health_condition = Patient_Diagnosis.diagnosis_condition()
+    provider = models.CharField(max_length=60)
+    health_condition = models.CharField(max_length=60)
     type = ('Please select type of appointment',
     'Consultation', 'Lab', 'Follow-up'
     )
     notes = models.TextField()
-    vitals = Vitals_Class()
-    medication = Patient_Medications()
-    labs = Patient_Labs()
+    vitals = models.CharField(max_length=60)
+    medication = models.CharField(max_length=60)
+    labs = models.CharField(max_length=60)
 
-class IWC_Visit
+class IWC_Visit(models.Model):
     date_visit = models.DateField()
-    provider = Provider.doctor_name()
-    health_condition = Patient_Diagnosis.diagnosis_condition()
+    provider = models.CharField(max_length=60)
+    health_condition = models.CharField(max_length=60)
     type = ('Please select type of appointment',
     'Consultation', 'Lab', 'Follow-up'
     )
     notes = models.TextField()
-    vitals = Vitals_Class()
-    medication = Patient_Medications()
-    labs = Patient_Labs()
+    vitals = models.CharField(max_length=60)
+    medication = models.CharField(max_length=60)
+    labs = models.CharField(max_length=60)

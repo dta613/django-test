@@ -42,6 +42,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'whitenoise.runserver_nostatic',
     'phonenumber_field',
+    'myapp',
+    'rest_framework',
 
 )
 
@@ -63,7 +65,7 @@ ROOT_URLCONF = 'django_test.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,6 +77,11 @@ TEMPLATES = [
         },
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
 
 WSGI_APPLICATION = 'django_test.wsgi.application'
 

@@ -12,8 +12,8 @@ Class-based views
 Including another URLconf
     1. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
-from django.urls import include, path
+from django.conf.urls import url, include
+# from django.urls import path
 from django.contrib import admin
 import myapp
 from myapp.views import login as login
@@ -23,9 +23,34 @@ from myapp.views import index as index
 
 
 urlpatterns = [
-    path('admin', admin.site.urls),
+    url(r'^admin', admin.site.urls),
     url(r'^logout/', logout, name='logout'),
     url(r'^signup/', signup, name='signup'),
     url(r'^login/', login, name='login'),
     url(r'^$', index, name='index'),
+]
+
+from rest_framework import routers, serializers, viewsets
+from myapp.models import Patient
+
+# Serializers define the API representation.
+class PatientSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Patient
+        fields = ('Patient_firstname', 'Patient_lastname')
+
+# ViewSets define the view behavior.
+class PatientViewSet(viewsets.ModelViewSet):
+    queryset = Patient.objects.all()
+    serializer_class = PatientSerializer
+
+# Routers provide an easy way of automatically determining the URL conf.
+router = routers.DefaultRouter()
+router.register(r'patient', PatientViewSet)
+
+# Wire up our API using automatic URL routing.
+# Additionally, we include login URLs for the browsable API.
+urlpatterns = [
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

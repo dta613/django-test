@@ -56,7 +56,7 @@ def logout(request, View):
 
 from rest_framework import viewsets
 from myapp.serializers import UserSerializer, PatientSerializer
-from models import User_list, Patient
+from myapp.models import User_list, Patient
 
 
 class UserViewSet(viewsets.ModelViewSet):

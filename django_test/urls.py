@@ -20,16 +20,6 @@ from myapp.views import login as login
 from myapp.views import logout as logout
 from myapp.views import signup as signup
 from myapp.views import index as index
-
-
-urlpatterns = [
-    url(r'^admin', admin.site.urls),
-    url(r'^logout/', logout, name='logout'),
-    url(r'^signup/', signup, name='signup'),
-    url(r'^login/', login, name='login'),
-    url(r'^$', index, name='index'),
-]
-
 from rest_framework import routers, serializers, viewsets
 from myapp.models import Patient
 
@@ -53,4 +43,11 @@ router.register(r'patient', PatientViewSet)
 urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    
+#For other experience outside of API
+    url(r'^admin', admin.site.urls),
+    url(r'^logout/', logout, name='logout'),
+    url(r'^signup/', signup, name='signup'),
+    url(r'^login/', login, name='login'),
+    url(r'^$', index, name='index'),
 ]

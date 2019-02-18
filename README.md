@@ -16,6 +16,7 @@ Either clone and download the project, and go to the command-line for the next s
 Use a virtual environment to separate the package versions for this Django application from your other projects
 
 Run the following code:
+
 virtualenv my_project
 source my_project/bin/activate
 

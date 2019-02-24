@@ -264,3 +264,45 @@ class IWC_Visit(models.Model):
     vitals = models.CharField(max_length=60)
     medication = models.CharField(max_length=60)
     labs = models.CharField(max_length=60)
+
+#     text, date, bytea
+# smallint, text, char(n) or text for pass
+
+
+# account: 
+# a_id,username, salt, passhash
+
+# staff: 
+# staffid, username(link), email, fname, lname, address, etc
+
+# doctor:
+# doctor_id, name, gender, specialty, dob, 
+
+# patient: 
+# patientid, fname, lname, dob, gender, phone1, phone2, email, address, religion, occupation, parent_guardian_name, 
+
+# patient_appointments:
+# id, date, type, status, notes, patientid(link),
+
+# patient_visit:
+# visitid, date, type, status, location, action, reason, patientid(link),vitalsid(link), medicationid(link), labs(link), imaging(link), Diagnosisid(link), doctor(link)
+
+# patient_vitals:
+# id, recorddate, temp, weight, height, sbp, dbp, heartrate, resprate, visitid(link)
+
+# patient_medication:
+# id, prescdate, penddate, visit, med1, med2, notes, visitid(link)
+
+# patient_labs:
+# id, visit, type, notes, visitid(link)
+
+# patient_imaging:
+# id, visit, type, notes, visitid(link)
+
+# Diagnosis:
+# diagnosis_id, diagnosis_classid(link), visitid(link), date, actual_description, etc
+
+# diagnosisClass: 
+# diagnosis_classid, name, description, etc
+
+

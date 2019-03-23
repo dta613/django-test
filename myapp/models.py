@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.db.models import fields
-from phonenumber_field.modelfields import PhoneNumberField
+# from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 
@@ -39,21 +39,22 @@ from phonenumber_field.modelfields import PhoneNumberField
 # Appointment to Patient_ANC
 # Appointment to Patient_IWC
 
-
+# Foreign key constraints built on:
 class Patient(models.Model):
     Patient_firstname = models.CharField(max_length=60)
     Patient_lastname = models.CharField(max_length=60)
     age = models.PositiveSmallIntegerField()
     gender = models.CharField(max_length=60)
-    dob = models.DateField()
+    # dob = models.DateField() <- calculate age based on dob
     occupation = models.CharField(max_length=30)
-    contact_number = PhoneNumberField()
+    # contact_number = PhoneNumberField()
     residence = models.CharField(max_length=60)
     religion = models.CharField(max_length=60)
     parent_guardian_name = models.CharField(max_length=60)
-    parent_guardian_contact_number = PhoneNumberField()
-    date_data_added = models.DateTimeField()
+    # parent_guardian_contact_number = PhoneNumberField()
+    # date_data_added = models.DateTimeField()
     date_time_updated = models.DateTimeField()
+
 
 class User_list(models.Model):
     username = models.CharField(max_length = 30)
@@ -91,6 +92,7 @@ class Appointment(models.Model):
     'Scheduled', 'Canceled', 'Missed'
     )
     notes = models.TextField()
+
 
 class Patient_Vitals(models.Model):
     temperature = models.PositiveSmallIntegerField()
@@ -169,6 +171,8 @@ class Visit(models.Model):
     vitals = models.CharField(max_length=60)
     medication = models.CharField(max_length=60)
     labs = models.CharField(max_length=60)
+    patient_who_visited = models.ForeignKey('Patient',  on_delete=models.CASCADE)
+
 
 class Patient_ANC(models.Model):
     Patient_firstname = models.CharField(max_length=60)
@@ -177,11 +181,11 @@ class Patient_ANC(models.Model):
     gender = models.CharField(max_length=60)
     dob = models.DateField()
     occupation = models.CharField(max_length=30)
-    contact_number = PhoneNumberField()
+    # contact_number = PhoneNumberField()
     residence = models.CharField(max_length=60)
     religion = models.CharField(max_length=60)
     parent_guardian_name = models.CharField(max_length=60)
-    parent_guardian_contact_number = PhoneNumberField()
+    # parent_guardian_contact_number = PhoneNumberField()
     date_data_added = models.DateTimeField()
     date_time_updated = models.DateTimeField()
     parity = models.CharField(max_length=30)
@@ -194,10 +198,10 @@ class Patient_IWC(models.Model):
     age = models.PositiveSmallIntegerField()
     gender = models.CharField(max_length=60)
     dob = models.DateField()
-    contact_number = PhoneNumberField()
+    # contact_number = PhoneNumberField()
     residence = models.CharField(max_length=60)
     parent_guardian_name = models.CharField(max_length=60)
-    parent_guardian_contact_number = PhoneNumberField()
+    # parent_guardian_contact_number = PhoneNumberField()
     date_data_added = models.DateTimeField()
     date_time_updated = models.DateTimeField()
 
@@ -209,11 +213,11 @@ class Patient_Inpatient(models.Model):
     gender = models.CharField(max_length=60)
     dob = models.DateField()
     occupation = models.CharField(max_length=30)
-    contact_number = PhoneNumberField()
+    # contact_number = PhoneNumberField()
     residence = models.CharField(max_length=60)
     religion = models.CharField(max_length=60)
     parent_guardian_name = models.CharField(max_length=60)
-    parent_guardian_contact_number = PhoneNumberField()
+    # parent_guardian_contact_number = PhoneNumberField()
     date_data_added = models.DateTimeField()
     date_time_updated = models.DateTimeField()
 
@@ -269,17 +273,17 @@ class IWC_Visit(models.Model):
 # smallint, text, char(n) or text for pass
 
 
-# account: 
+# account:
 # a_id,username, salt, passhash
 
-# staff: 
+# staff:
 # staffid, username(link), email, fname, lname, address, etc
 
 # doctor:
-# doctor_id, name, gender, specialty, dob, 
+# doctor_id, name, gender, specialty, dob,
 
-# patient: 
-# patientid, fname, lname, dob, gender, phone1, phone2, email, address, religion, occupation, parent_guardian_name, 
+# patient:
+# patientid, fname, lname, dob, gender, phone1, phone2, email, address, religion, occupation, parent_guardian_name,
 
 # patient_appointments:
 # id, date, type, status, notes, patientid(link),
@@ -302,7 +306,5 @@ class IWC_Visit(models.Model):
 # Diagnosis:
 # diagnosis_id, diagnosis_classid(link), visitid(link), date, actual_description, etc
 
-# diagnosisClass: 
+# diagnosisClass:
 # diagnosis_classid, name, description, etc
-
-

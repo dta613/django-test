@@ -41,6 +41,7 @@ from django.db.models import fields
 
 # Foreign key constraints built on:
 class Patient(models.Model):
+    patientid = models.PositiveSmallIntegerField()
     Patient_firstname = models.CharField(max_length=60)
     Patient_lastname = models.CharField(max_length=60)
     age = models.PositiveSmallIntegerField()
@@ -171,7 +172,7 @@ class Visit(models.Model):
     vitals = models.CharField(max_length=60)
     medication = models.CharField(max_length=60)
     labs = models.CharField(max_length=60)
-    patient_who_visited = models.ForeignKey('Patient',  on_delete=models.CASCADE)
+    patient_who_visited = models.ForeignKey('Patient.patientid = 1',  on_delete=models.CASCADE)
 
 
 class Patient_ANC(models.Model):

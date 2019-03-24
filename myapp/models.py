@@ -41,7 +41,6 @@ from django.db.models import fields
 
 # Foreign key constraints built on:
 class Patient(models.Model):
-    patientid = models.PositiveSmallIntegerField()
     Patient_firstname = models.CharField(max_length=60)
     Patient_lastname = models.CharField(max_length=60)
     age = models.PositiveSmallIntegerField()
@@ -55,7 +54,22 @@ class Patient(models.Model):
     # parent_guardian_contact_number = PhoneNumberField()
     # date_data_added = models.DateTimeField()
     date_time_updated = models.DateTimeField()
+    patientid = models.ForeignKey('Visit')
+    ## FK many-to-one
 
+class Visit(models.Model):
+    date_visit = models.DateField()
+    provider = models.CharField(max_length=60)
+    health_condition = models.CharField(max_length=60)
+    type = ('Please select type of appointment',
+    'Consultation', 'Lab', 'Follow-up'
+    )
+    notes = models.TextField()
+    vitals = models.CharField(max_length=60)
+    medication = models.CharField(max_length=60)
+    labs = models.CharField(max_length=60)
+    patient_who_visited = models.ForeignKey('Patient', default = 1, on_delete=models.CASCADE)
+## FK many-to-one
 
 class User_list(models.Model):
     username = models.CharField(max_length = 30)
@@ -161,18 +175,6 @@ class Imaging_Class(models.Model):
     )
 
 
-class Visit(models.Model):
-    date_visit = models.DateField()
-    provider = models.CharField(max_length=60)
-    health_condition = models.CharField(max_length=60)
-    type = ('Please select type of appointment',
-    'Consultation', 'Lab', 'Follow-up'
-    )
-    notes = models.TextField()
-    vitals = models.CharField(max_length=60)
-    medication = models.CharField(max_length=60)
-    labs = models.CharField(max_length=60)
-    patient_who_visited = models.ForeignKey('Patient.patientid = 1',  on_delete=models.CASCADE)
 
 
 class Patient_ANC(models.Model):

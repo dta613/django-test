@@ -55,7 +55,7 @@ class Patient(models.Model):
     # date_data_added = models.DateTimeField()
     date_time_updated = models.DateTimeField()
     patientid = models.ForeignKey('Visit', default = 1)
-    ## FK many-to-one
+## FK many-to-one
 
 class Visit(models.Model):
     date_visit = models.DateField()

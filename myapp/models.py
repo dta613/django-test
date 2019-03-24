@@ -54,7 +54,7 @@ class Patient(models.Model):
     # parent_guardian_contact_number = PhoneNumberField()
     # date_data_added = models.DateTimeField()
     date_time_updated = models.DateTimeField()
-    patientid = models.ForeignKey('Visit')
+    patientid = models.ForeignKey('Visit', default = 1)
     ## FK many-to-one
 
 class Visit(models.Model):

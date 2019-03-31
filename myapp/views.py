@@ -55,21 +55,21 @@ def logout(request, View):
 
 
 from rest_framework import viewsets
-from myapp.serializers import UserSerializer, PatientSerializer
-from myapp.models import User_list, Patient
+from myapp.serializers import userSerializer, patientSerializer
+from myapp.models import user_list, patient
 
 
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = User_list.objects.all().order_by('-date_joined')
-    serializer_class = UserSerializer
+    queryset = user_list.objects.all().order_by('-date_joined')
+    serializer_class = userSerializer
 
 
 class PatientViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows patients to be viewed or edited.
     """
-    queryset = Patient.objects.all()
-    serializer_class = PatientSerializer
+    queryset = patient.objects.all()
+    serializer_class = patientSerializer

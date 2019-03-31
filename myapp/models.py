@@ -40,9 +40,9 @@ from django.db.models import fields
 # Appointment to Patient_IWC
 
 # Foreign key constraints built on:
-class Patient(models.Model):
-    Patient_firstname = models.CharField(max_length=60)
-    Patient_lastname = models.CharField(max_length=60)
+class patient(models.Model):
+    patient_firstname = models.CharField(max_length=60)
+    patient_lastname = models.CharField(max_length=60)
     age = models.PositiveSmallIntegerField()
     gender = models.CharField(max_length=60)
     # dob = models.DateField() <- calculate age based on dob
@@ -54,10 +54,9 @@ class Patient(models.Model):
     # parent_guardian_contact_number = PhoneNumberField()
     # date_data_added = models.DateTimeField()
     date_time_updated = models.DateTimeField()
-    # patientid = models.ForeignKey('Visit', default = 1)
 ## FK many-to-one
 
-class Visit(models.Model):
+class visit(models.Model):
     date_visit = models.DateField()
     provider = models.CharField(max_length=60)
     health_condition = models.CharField(max_length=60)
@@ -68,24 +67,26 @@ class Visit(models.Model):
     vitals = models.CharField(max_length=60)
     medication = models.CharField(max_length=60)
     labs = models.CharField(max_length=60)
-    patient_who_visited = models.ForeignKey('Patient', default = 1, on_delete=models.CASCADE)
+    patient_who_visited = models.ForeignKey('patient', default = 1, on_delete=models.CASCADE)
 ## FK many-to-one
 
-class User_list(models.Model):
+class user_list(models.Model):
     username = models.CharField(max_length = 30)
     password = models.CharField(max_length = 30, unique=True)
 
-class Provider(models.Model):
+class provider(models.Model):
     doctor_name = models.CharField(max_length=60)
     description = models.CharField(max_length=60)
     date_data_added = models.DateTimeField()
+    # associated_visit = models.ForeignKey('visit', default=1, on_delete=models.CASCADE)
 
-class Patient_Diagnosis(models.Model):
+class patient_diagnosis(models.Model):
     diagnosis_condition = models.CharField(max_length=60)
     notes = models.TextField()
+    # associated_diagnosis = models.ForeignKey('visit', default=1, on_delete=models.CASCADE)
 
 #How do we want to create this class object to retrieve values from a file? - Lookup List
-class Diagnosis_Class(models.Model):
+class diagnosis_class(models.Model):
     diagnosis_option_value = (
         ('', 'Please select a diagnosis'),
         ('simple malaria', 'severe malaria'),
@@ -96,8 +97,9 @@ class Diagnosis_Class(models.Model):
         ('Rare cell enzyme disorders','Rare cell enzyme disorders'),
         ('Congenital dyserythropoietic anaemias','Congenital dyserythropoietic anaemias')
     )
+    # diagnosis = models.ForeignKey('patient_diagnosis', default=1, on_delete=models.CASCADE)
 
-class Appointment(models.Model):
+class appointment(models.Model):
     date_appointment = models.DateField()
     provider = models.CharField(max_length=60)
     type = ('Please select type of appointment',
@@ -107,26 +109,31 @@ class Appointment(models.Model):
     'Scheduled', 'Canceled', 'Missed'
     )
     notes = models.TextField()
+    # associated_appointment = models.ForeignKey('patient', default=1, on_delete=models.CASCADE)
 
 
-class Patient_Vitals(models.Model):
+class patient_vitals(models.Model):
     temperature = models.PositiveSmallIntegerField()
     weight = models.PositiveSmallIntegerField()
     sbp = models.PositiveSmallIntegerField()
     dbp = models.PositiveSmallIntegerField()
     heartrate = models.PositiveSmallIntegerField()
     respiratory = models.PositiveSmallIntegerField()
+    # associated_vitals = models.ForeignKey('visit', default=1, on_delete=models.CASCADE)
 
-class Patient_Medications(models.Model):
+
+class patient_medications(models.Model):
     provider = models.CharField(max_length=60)
     prescription_start = models.DateField()
     prescription_end = models.DateField()
     prescribed_items = models.CharField(max_length=60)
     prescription = models.TextField()
+    # associated_medications = models.ForeignKey('visit', default=1, on_delete=models.CASCADE)
+
 
 #How do we want to create this class to retrieve values from a file? - LookupList
 
-class Medications_Class(models.Model):
+class medications_class(models.Model):
     medication_option_value = (
         ('', 'Please select a medication'),
         ('simple malaria', 'severe malaria'),
@@ -137,14 +144,16 @@ class Medications_Class(models.Model):
         ('Rare cell enzyme disorders','Rare cell enzyme disorders'),
         ('Congenital dyserythropoietic anaemias','Congenital dyserythropoietic anaemias')
     )
+    # medications = models.ForeignKey('patient_medications', default=1, on_delete=models.CASCADE)
 
-class Patient_Labs(models.Model):
+class patient_labs(models.Model):
     type = models.CharField(max_length=30)
     notes = models.TextField()
+    # associated_labs = models.ForeignKey('patient_visit', default=1, on_delete=models.CASCADE)
 
 #What are the names of the labs that needs to be in this class object?
 #How do we configure for dynamic user entry to add to the choices?
-class Labs_Class(models.Model):
+class labs_class(models.Model):
     labs_option_value = (
         ('', 'Please select a lab type'),
         ('simple malaria', 'severe malaria'),
@@ -155,14 +164,16 @@ class Labs_Class(models.Model):
         ('Rare cell enzyme disorders','Rare cell enzyme disorders'),
         ('Congenital dyserythropoietic anaemias','Congenital dyserythropoietic anaemias')
     )
+    # labs = models.ForeignKey('patient_labs', default=1, on_delete=models.CASCADE)
 
 
-class Patient_Imaging(models.Model):
+class patient_imaging(models.Model):
     type = models.CharField(max_length=30)
     notes = models.TextField()
+    # associated_imaging = models.ForeignKey('patient_visit', default=1, on_delete=models.CASCADE)
 
 #How do we configure for dynamic user entry to add to the choices?
-class Imaging_Class(models.Model):
+class imaging_class(models.Model):
     imaging_option_value = (
         ('', 'Please select a imaging type'),
         ('simple malaria', 'severe malaria'),
@@ -173,13 +184,12 @@ class Imaging_Class(models.Model):
         ('Rare cell enzyme disorders','Rare cell enzyme disorders'),
         ('Congenital dyserythropoietic anaemias','Congenital dyserythropoietic anaemias')
     )
+    # imaging = models.ForeignKey('patient_imaging', default=1, on_delete=models.CASCADE)
 
-
-
-
-class Patient_ANC(models.Model):
-    Patient_firstname = models.CharField(max_length=60)
-    Patient_lastname = models.CharField(max_length=60)
+## Patient for Ante-natal care, supporting pregnant women (paturient)
+class patient_anc(models.Model):
+    patient_firstname = models.CharField(max_length=60)
+    patient_lastname = models.CharField(max_length=60)
     age = models.PositiveSmallIntegerField()
     gender = models.CharField(max_length=60)
     dob = models.DateField()
@@ -194,8 +204,8 @@ class Patient_ANC(models.Model):
     parity = models.CharField(max_length=30)
     lmp = models.CharField(max_length=30)
 
-
-class Patient_IWC(models.Model):
+## Patient for infant wellness care, supporting women and infants
+class patient_iwc(models.Model):
     Patient_firstname = models.CharField(max_length=60)
     Patient_lastname = models.CharField(max_length=60)
     age = models.PositiveSmallIntegerField()
@@ -208,10 +218,10 @@ class Patient_IWC(models.Model):
     date_data_added = models.DateTimeField()
     date_time_updated = models.DateTimeField()
 
-
-class Patient_Inpatient(models.Model):
-    Patient_firstname = models.CharField(max_length=60)
-    Patient_lastname = models.CharField(max_length=60)
+## Patient that gets admitted to the hospital
+class patient_inpatient(models.Model):
+    patient_firstname = models.CharField(max_length=60)
+    patient_lastname = models.CharField(max_length=60)
     age = models.PositiveSmallIntegerField()
     gender = models.CharField(max_length=60)
     dob = models.DateField()
@@ -224,31 +234,7 @@ class Patient_Inpatient(models.Model):
     date_data_added = models.DateTimeField()
     date_time_updated = models.DateTimeField()
 
-class ANC_Vitals(models.Model):
-    temperature = models.PositiveSmallIntegerField()
-    weight = models.PositiveSmallIntegerField()
-    sbp = models.PositiveSmallIntegerField()
-    dbp = models.PositiveSmallIntegerField()
-    heartrate = models.PositiveSmallIntegerField()
-    respiratory = models.PositiveSmallIntegerField()
-
-class IWC_Vitals(models.Model):
-    temperature = models.PositiveSmallIntegerField()
-    weight = models.PositiveSmallIntegerField()
-    sbp = models.PositiveSmallIntegerField()
-    dbp = models.PositiveSmallIntegerField()
-    heartrate = models.PositiveSmallIntegerField()
-    respiratory = models.PositiveSmallIntegerField()
-
-class ANC_Labs(models.Model):
-    type = models.CharField(max_length=30)
-    notes = models.TextField()
-
-class IWC_Labs(models.Model):
-    type = models.CharField(max_length=30)
-    notes = models.TextField()
-
-class ANC_Visit(models.Model):
+class anc_visit(models.Model):
     date_visit = models.DateField()
     provider = models.CharField(max_length=60)
     health_condition = models.CharField(max_length=60)
@@ -259,8 +245,9 @@ class ANC_Visit(models.Model):
     vitals = models.CharField(max_length=60)
     medication = models.CharField(max_length=60)
     labs = models.CharField(max_length=60)
+    # anc_patient = models.ForeignKey('patient_anc', default=1, on_delete=models.CASCADE)
 
-class IWC_Visit(models.Model):
+class iwc_visit(models.Model):
     date_visit = models.DateField()
     provider = models.CharField(max_length=60)
     health_condition = models.CharField(max_length=60)
@@ -271,6 +258,40 @@ class IWC_Visit(models.Model):
     vitals = models.CharField(max_length=60)
     medication = models.CharField(max_length=60)
     labs = models.CharField(max_length=60)
+    # iwc_patient = models.ForeignKey('patient_iwc', default=1, on_delete=models.CASCADE)
+
+
+class anc_vitals(models.Model):
+    temperature = models.PositiveSmallIntegerField()
+    weight = models.PositiveSmallIntegerField()
+    sbp = models.PositiveSmallIntegerField()
+    dbp = models.PositiveSmallIntegerField()
+    heartrate = models.PositiveSmallIntegerField()
+    respiratory = models.PositiveSmallIntegerField()
+    # associated_visit = models.ForeignKey('anc_visit', default=1, on_delete=models.CASCADE)
+
+
+class iwc_vitals(models.Model):
+    temperature = models.PositiveSmallIntegerField()
+    weight = models.PositiveSmallIntegerField()
+    sbp = models.PositiveSmallIntegerField()
+    dbp = models.PositiveSmallIntegerField()
+    heartrate = models.PositiveSmallIntegerField()
+    respiratory = models.PositiveSmallIntegerField()
+    # associated_visit = models.ForeignKey('iwc_visit', default=1, on_delete=models.CASCADE)
+
+
+class anc_labs(models.Model):
+    type = models.CharField(max_length=30)
+    notes = models.TextField()
+    # associated_visit = models.ForeignKey('anc_visit', default=1, on_delete=models.CASCADE)
+
+
+class iwc_labs(models.Model):
+    type = models.CharField(max_length=30)
+    notes = models.TextField()
+    # associated_visit = models.ForeignKey('iwc_visit', default=1, on_delete=models.CASCADE)
+
 
 #     text, date, bytea
 # smallint, text, char(n) or text for pass

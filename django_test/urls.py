@@ -21,18 +21,18 @@ from myapp.views import logout as logout
 from myapp.views import signup as signup
 from myapp.views import index as index
 from rest_framework import routers, serializers, viewsets
-from myapp.models import Patient
+from myapp.models import patient
 
 # Serializers define the API representation.
-class PatientSerializer(serializers.HyperlinkedModelSerializer):
+class patientSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Patient
-        fields = ('Patient_firstname', 'Patient_lastname')
+        model = patient
+        fields = ('patient_firstname', 'patient_lastname')
 
 # ViewSets define the view behavior.
 class PatientViewSet(viewsets.ModelViewSet):
-    queryset = Patient.objects.all()
-    serializer_class = PatientSerializer
+    queryset = patient.objects.all()
+    serializer_class = patientSerializer
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
@@ -43,7 +43,7 @@ router.register(r'patient', PatientViewSet)
 urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    
+
 #For other experience outside of API
     url(r'^admin', admin.site.urls),
     url(r'^logout/', logout, name='logout'),

@@ -1,28 +1,28 @@
-from .models import User_list, Patient, Patient_IWC, Patient_ANC,  Patient_Inpatient
+from .models import user_list, patient, patient_iwc, patient_anc,  patient_inpatient
 from rest_framework import serializers
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class userSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = User_list
+        model = user_list
         fields = ('username', 'password')
 
-class PatientSerializer(serializers.HyperlinkedModelSerializer):
+class patientSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Patient
-        fields = ('Patient_firstname', 'Patient_lastname', '_all_',)
+        model = patient
+        fields = ('patient_firstname', 'patient_lastname', '_all_',)
 
-class Patient_ANCSerializer(serializers.HyperlinkedModelSerializer):
+class patient_ancSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Patient_ANC
-        fields = ('Patient_firstname', 'Patient_lastname')
+        model = patient_anc
+        fields = ('patient_firstname', 'patient_lastname')
 
-class Patient_IWCSerializer(serializers.HyperlinkedModelSerializer):
+class patient_iwcSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Patient_IWC
-        fields = ('Patient_firstname', 'Patient_lastname')
+        model = patient_iwc
+        fields = ('patient_firstname', 'patient_lastname')
 
-class Patient_InpatientSerializer(serializers.HyperlinkedModelSerializer):
+class patient_inpatientSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Patient_Inpatient
+        model = patient_inpatient
         fields = ('Patient_firstname', 'Patient_lastname')

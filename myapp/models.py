@@ -170,7 +170,7 @@ class labs_class(models.Model):
 class patient_imaging(models.Model):
     type = models.CharField(max_length=30)
     notes = models.TextField()
-    associated_imaging = models.ForeignKey('patient_visit', default=1, on_delete=models.CASCADE)
+    associated_imaging = models.ForeignKey('visit', default=1, on_delete=models.CASCADE)
 
 #How do we configure for dynamic user entry to add to the choices?
 class imaging_class(models.Model):

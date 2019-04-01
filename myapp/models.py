@@ -100,7 +100,7 @@ class diagnosis_class(models.Model):
 
 class appointment(models.Model):
     date_appointment = models.DateField()
-    provider = models.CharField(max_length=60)
+    provider = models.ForeignKey('provider', default=1, on_delete=models.CASCADE)
     type = ('Please select type of appointment',
     'Consultation', 'Lab', 'Follow-up'
     )

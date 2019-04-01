@@ -31,11 +31,13 @@ Using the virtual environment allows you to install the package requirements in 
 pip install requirements.txt
 ```
 
-After installing all the project, you can now start launching Django as an web application server. 
+After installing all the project, you can now start launching Django as an web application server.
 
 Go to the directory in which ```manage.py``` is located.
 
-### Go ahead, run the command ```python manage.py runserver```
+### Go ahead, run the command:
+
+```python manage.py runserver```
 
 You should be able to see the server running in ```localhost:8000```
 

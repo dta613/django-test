@@ -78,7 +78,7 @@ class provider(models.Model):
     doctor_name = models.CharField(max_length=60)
     description = models.CharField(max_length=60)
     date_data_added = models.DateTimeField()
-    associated_visit = models.ForeignKey('visit', default=1, on_delete=models.CASCADE)
+    associated_provider = models.ForeignKey('visit', default=1, on_delete=models.CASCADE)
 
 class patient_diagnosis(models.Model):
     diagnosis_condition = models.CharField(max_length=60)

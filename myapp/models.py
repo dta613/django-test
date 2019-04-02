@@ -81,22 +81,14 @@ class provider(models.Model):
 
 class patient_diagnosis(models.Model):
     diagnosis_condition = models.CharField(max_length=60)
-    notes = models.TextField()
-    associated_diagnosis = models.ForeignKey('visit', default=1, on_delete=models.CASCADE)
+    notes = models.TextField(blank=True)
+    associated_visit = models.ForeignKey('visit', default=1, on_delete=models.CASCADE)
 
 #How do we want to create this class object to retrieve values from a file? - Lookup List
 class diagnosis_class(models.Model):
-    diagnosis_option_value = (
-        ('', 'Please select a diagnosis'),
-        ('simple malaria', 'severe malaria'),
-        ('a-thalassaemia syndromes', 'a-thalassaemia syndromes'),
-        ('Sickle cell syndromes', 'Sickle cell syndromes'),
-        ('Other haemoglobin variants','Other haemoglobin variants'),
-        ('Rare cell membrane disorders','Rare cell membrane disorders'),
-        ('Rare cell enzyme disorders','Rare cell enzyme disorders'),
-        ('Congenital dyserythropoietic anaemias','Congenital dyserythropoietic anaemias')
-    )
     diagnosis = models.ForeignKey('patient_diagnosis', default=1, on_delete=models.CASCADE)
+    diagnosis_name = models.CharField(max_length=60, blank=True)
+    description = models.TextField(blank=True)
 
 class appointment(models.Model):
     date_appointment = models.DateField()
@@ -108,7 +100,7 @@ class appointment(models.Model):
     'Scheduled', 'Canceled', 'Missed'
     )
     notes = models.TextField()
-    associated_appointment = models.ForeignKey('patient', default=1, on_delete=models.CASCADE)
+    associated_visit  = models.ForeignKey('patient', default=1, on_delete=models.CASCADE)
 
 
 class patient_vitals(models.Model):
@@ -118,7 +110,7 @@ class patient_vitals(models.Model):
     dbp = models.PositiveSmallIntegerField()
     heartrate = models.PositiveSmallIntegerField()
     respiratory = models.PositiveSmallIntegerField()
-    associated_vitals = models.ForeignKey('visit', default=1, on_delete=models.CASCADE)
+    associated_visit  = models.ForeignKey('visit', default=1, on_delete=models.CASCADE)
 
 
 class patient_medications(models.Model):
@@ -127,63 +119,38 @@ class patient_medications(models.Model):
     prescription_end = models.DateField()
     prescribed_items = models.CharField(max_length=60)
     prescription = models.TextField()
-    associated_medications = models.ForeignKey('visit', default=1, on_delete=models.CASCADE)
-
+    associated_visit  = models.ForeignKey('visit', default=1, on_delete=models.CASCADE)
+    medications = models.ForeignKey('medications_class', default=1, on_delete=models.CASCADE)
+    notes = models.TextField(blank=True)
 
 #How do we want to create this class to retrieve values from a file? - LookupList
 
 class medications_class(models.Model):
-    medication_option_value = (
-        ('', 'Please select a medication'),
-        ('simple malaria', 'severe malaria'),
-        ('a-thalassaemia syndromes', 'a-thalassaemia syndromes'),
-        ('Sickle cell syndromes', 'Sickle cell syndromes'),
-        ('Other haemoglobin variants','Other haemoglobin variants'),
-        ('Rare cell membrane disorders','Rare cell membrane disorders'),
-        ('Rare cell enzyme disorders','Rare cell enzyme disorders'),
-        ('Congenital dyserythropoietic anaemias','Congenital dyserythropoietic anaemias')
-    )
+    medication_name = models.CharField(max_length=60,blank=True)
     medications = models.ForeignKey('patient_medications', default=1, on_delete=models.CASCADE)
 
 class patient_labs(models.Model):
     type = models.CharField(max_length=30)
-    notes = models.TextField()
-    # associated_labs = models.ForeignKey('patient_visit', default=1, on_delete=models.CASCADE)
+    notes = models.TextField(blank=True)
+    associated_visit  = models.ForeignKey('visit', default=1, on_delete=models.CASCADE)
 
 #What are the names of the labs that needs to be in this class object?
 #How do we configure for dynamic user entry to add to the choices?
 class labs_class(models.Model):
-    labs_option_value = (
-        ('', 'Please select a lab type'),
-        ('simple malaria', 'severe malaria'),
-        ('a-thalassaemia syndromes', 'a-thalassaemia syndromes'),
-        ('Sickle cell syndromes', 'Sickle cell syndromes'),
-        ('Other haemoglobin variants','Other haemoglobin variants'),
-        ('Rare cell membrane disorders','Rare cell membrane disorders'),
-        ('Rare cell enzyme disorders','Rare cell enzyme disorders'),
-        ('Congenital dyserythropoietic anaemias','Congenital dyserythropoietic anaemias')
-    )
     labs = models.ForeignKey('patient_labs', default=1, on_delete=models.CASCADE)
-
+    labs_name = models.CharField(max_length=60, blank=True)
+    description = models.TextField(blank=True)
 
 class patient_imaging(models.Model):
     type = models.CharField(max_length=30)
     notes = models.TextField()
-    associated_imaging = models.ForeignKey('visit', default=1, on_delete=models.CASCADE)
+    associated_visit  = models.ForeignKey('visit', default=1, on_delete=models.CASCADE)
 
 #How do we configure for dynamic user entry to add to the choices?
 class imaging_class(models.Model):
-    imaging_option_value = (
-        ('', 'Please select a imaging type'),
-        ('simple malaria', 'severe malaria'),
-        ('a-thalassaemia syndromes', 'a-thalassaemia syndromes'),
-        ('Sickle cell syndromes', 'Sickle cell syndromes'),
-        ('Other haemoglobin variants','Other haemoglobin variants'),
-        ('Rare cell membrane disorders','Rare cell membrane disorders'),
-        ('Rare cell enzyme disorders','Rare cell enzyme disorders'),
-        ('Congenital dyserythropoietic anaemias','Congenital dyserythropoietic anaemias')
-    )
     imaging = models.ForeignKey('patient_imaging', default=1, on_delete=models.CASCADE)
+    imaging_name = models.CharField(max_length=60, blank=True)
+    description = models.TextField(blank=True)
 
 ## Patient for Ante-natal care, supporting pregnant women (paturient)
 class patient_anc(models.Model):

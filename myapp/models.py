@@ -86,7 +86,7 @@ class patient_diagnosis(models.Model):
 
 #How do we want to create this class object to retrieve values from a file? - Lookup List
 class diagnosis_class(models.Model):
-    diagnosis = models.ForeignKey('patient_diagnosis', default=1, on_delete=models.CASCADE)
+    diagnosis = models.CharField('patient_diagnosis', unique=True, max_length=10)
     diagnosis_name = models.CharField(max_length=60, blank=True)
     description = models.TextField(blank=True)
 
@@ -120,7 +120,7 @@ class patient_medications(models.Model):
     prescribed_items = models.CharField(max_length=60)
     prescription = models.TextField()
     associated_visit  = models.ForeignKey('visit', default=1, on_delete=models.CASCADE)
-    medications = models.ForeignKey('medications_class', default=1, on_delete=models.CASCADE)
+    # medications = models.ForeignKey('medications_class', default=1, on_delete=models.CASCADE)
     notes = models.TextField(blank=True)
 
 #How do we want to create this class to retrieve values from a file? - LookupList

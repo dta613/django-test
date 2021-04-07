@@ -98,7 +98,7 @@ WSGI_APPLICATION = 'django_test.wsgi.application'
     #    'ENGINE': 'django.db.backends.postgresql_psycopg2',
     #    'NAME': os.path.join ('postgres'),
     #    'USER' : 'postgres',
-    #    'PASSWORD': 'C@rp3D!3m',
+    #    'PASSWORD': 'password',
     #    'HOST': '',
     #    'PORT' : '5433'
 
